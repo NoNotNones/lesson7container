@@ -1,4 +1,4 @@
-name: Docker action
+name: dockerAction
 
 on:
   push:
@@ -7,26 +7,14 @@ jobs:
   test-docker-action:
     name: Job to test our Docker action
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Make entrypoint executable
-        run: chmod +x entrypoint.sh
-
-      - name: Run Docker action
-        id: docker-action
-        uses: ./
+      - uses: actions/checkout@v4
+      - run: chmod +x entrypoint.sh
+      - uses: ./
+        id: dockerAction      
         with:
           number1: 4
           number2: 2
-
-      - name: Display result
-        run: echo "Result is ${{ steps.docker-action.outputs.result }}"
-
-      - name: Display file using GITHUB_WORKSPACE
-        run: cat "$GITHUB_WORKSPACE/containerOutputfile.txt"
-
-      - name: Display file using github.workspace
-        run: cat "${{ github.workspace }}/containerOutputfile.txt"
+      - run: echo ${{ steps.dockerAction.outputs.result }}
+      - run: cat $GITHUB_WORKSPACE/containerOutputfile.txt
+      - run: cat ${{ github.workspace }}/containerOutputfile.txt
