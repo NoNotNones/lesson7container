@@ -26,7 +26,7 @@ jobs:
         run: echo "Result is ${{ steps.docker-action.outputs.result }}"
 
       - name: Display file using GITHUB_WORKSPACE
-        run: cat "$GITHUB_WORKSPACE/containeroutputfile.txt"
+        run: cat "$GITHUB_WORKSPACE/containerOutputfile.txt"
 
       - name: Display file using github.workspace
-        run: cat "${{ github.workspace }}/containeroutputfile.txt"
+        run: cat "${{ github.workspace }}/containerOutputfile.txt"
